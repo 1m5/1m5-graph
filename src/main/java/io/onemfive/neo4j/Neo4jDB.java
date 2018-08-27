@@ -1,5 +1,6 @@
 package io.onemfive.neo4j;
 
+import io.onemfive.core.infovault.DAO;
 import io.onemfive.core.infovault.InfoVaultDB;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
@@ -27,6 +28,14 @@ public class Neo4jDB implements InfoVaultDB {
     @Override
     public Status getStatus() {
         return null;
+    }
+
+    @Override
+    public void execute(DAO dao) throws Exception {
+        if(dao instanceof Neo4jDAO) {
+            ((Neo4jDAO)dao).setNeo4j(this);
+        }
+        dao.execute();
     }
 
     public boolean init(Properties properties) {
