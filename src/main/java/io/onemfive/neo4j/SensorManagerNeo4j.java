@@ -28,6 +28,7 @@ public class SensorManagerNeo4j implements SensorManager {
                 n = db.getGraphDb().createNode(Label.label(Peer.class.getName()));
                 GraphUtil.updateProperties(n, peer.toMap());
             }
+            tx.success();
         }
     }
 
