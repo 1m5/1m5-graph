@@ -8,6 +8,8 @@ import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -42,9 +44,9 @@ public class Neo4jDB implements InfoVaultDB {
     }
 
     @Override
-    public void save(byte[] content, String key, boolean autoCreate) throws FileNotFoundException {
+    public void save(String label, String key, byte[] content, boolean autoCreate) throws FileNotFoundException {
         try (Transaction tx = graphDb.beginTx()) {
-            Node n = graphDb.findNode(Label.label(File.class.getName()),"name",key);
+            Node n = graphDb.findNode(Label.label(label),"name",key);
             if(n == null) {
                 if(autoCreate) {
                     n = graphDb.createNode(Label.label(File.class.getName()));
@@ -58,10 +60,10 @@ public class Neo4jDB implements InfoVaultDB {
     }
 
     @Override
-    public byte[] load(String key) throws FileNotFoundException {
+    public byte[] load(String label, String key) throws FileNotFoundException {
         byte[] content;
         try (Transaction tx = graphDb.beginTx()) {
-            Node n = graphDb.findNode(Label.label(File.class.getName()),"name",key);
+            Node n = graphDb.findNode(Label.label(label),"name",key);
             if(n == null)
                 throw new FileNotFoundException("Key "+key+" not found.");
             Object obj = n.getProperty("content");
@@ -71,6 +73,20 @@ public class Neo4jDB implements InfoVaultDB {
             tx.success();
         }
         return content;
+    }
+
+    @Override
+    public List<byte[]> loadAll(String label) {
+        List<byte[]> byteList = new ArrayList<>();
+        ResourceIterator<Node> nodes = graphDb.findNodes(Label.label(label));
+        Node n;
+        Object obj;
+        while(nodes.hasNext()) {
+            n = nodes.next();
+            obj = n.getProperty("content");
+            byteList.add(((String)obj).getBytes());
+        }
+        return byteList;
     }
 
     public boolean init(Properties properties) {
