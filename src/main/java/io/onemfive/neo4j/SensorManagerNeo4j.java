@@ -14,18 +14,19 @@ import java.util.Properties;
 public class SensorManagerNeo4j implements SensorManager {
 
     private static final String DBLOCATION = "/smn";
+    private static final Label peerLabel = Label.label(Peer.class.getName());
 
     private Neo4jDB db;
 
     @Override
     public void updatePeer(Peer peer) {
         try (Transaction tx = db.getGraphDb().beginTx()) {
-            Node n = db.getGraphDb().findNode(Label.label(Peer.class.getName()),"address",peer.getAddress());
+            Node n = db.getGraphDb().findNode(peerLabel,"address",peer.getAddress());
             if(n != null) {
                 GraphUtil.updateProperties(n, peer.toMap());
                 peer.fromMap(n.getAllProperties());
             } else {
-                n = db.getGraphDb().createNode(Label.label(Peer.class.getName()));
+                n = db.getGraphDb().createNode(peerLabel);
                 GraphUtil.updateProperties(n, peer.toMap());
             }
             tx.success();
@@ -36,7 +37,7 @@ public class SensorManagerNeo4j implements SensorManager {
     public Map<String,Peer> getAllPeers() {
         Map<String,Peer> peers = new HashMap<>();
         try (Transaction tx = db.getGraphDb().beginTx();
-             ResourceIterator<Node> i = db.getGraphDb().findNodes(Label.label(Peer.class.getName()))) {
+             ResourceIterator<Node> i = db.getGraphDb().findNodes(peerLabel)) {
             Peer p;
             Node n;
             while(i.hasNext()) {
