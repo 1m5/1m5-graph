@@ -54,7 +54,7 @@ public class Neo4jDB implements InfoVaultDB {
                 } else
                     throw new FileNotFoundException("Key not found and autoCreate=false");
             }
-            n.setProperty("content",new String(content));
+            n.setProperty("content",content);
             tx.success();
         }
     }
@@ -69,7 +69,7 @@ public class Neo4jDB implements InfoVaultDB {
             Object obj = n.getProperty("content");
             if(obj == null)
                 throw new FileNotFoundException("Property 'content' not found for key="+key);
-            content = ((String)obj).getBytes();
+            content = (byte[])obj;
             tx.success();
         }
         return content;
@@ -84,7 +84,7 @@ public class Neo4jDB implements InfoVaultDB {
         while(nodes.hasNext()) {
             n = nodes.next();
             obj = n.getProperty("content");
-            byteList.add(((String)obj).getBytes());
+            byteList.add((byte[])obj);
         }
         return byteList;
     }
