@@ -21,7 +21,7 @@ public class Neo4jDB implements InfoVaultDB {
     private Properties properties;
     private GraphDatabaseService graphDb;
 
-    protected Neo4jDB() {
+    public Neo4jDB() {
         super();
     }
 
