@@ -2,7 +2,6 @@ package io.onemfive.neo4j;
 
 import io.onemfive.core.infovault.DAO;
 import io.onemfive.core.infovault.InfoVaultDB;
-import io.onemfive.data.Peer;
 import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 
