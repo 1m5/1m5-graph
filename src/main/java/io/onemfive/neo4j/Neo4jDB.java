@@ -111,6 +111,7 @@ public class Neo4jDB implements InfoVaultDB {
                 {
                     LOG.info("Stopping...");
                     graphDb.shutdown();
+                    LOG.info("Stopped.");
                 }
             } );
 
