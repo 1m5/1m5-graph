@@ -5,7 +5,7 @@
 
 	<groupId>io.onemfive</groupId>
 	<artifactId>neo4j</artifactId>
-	<version>0.5.2-SNAPSHOT</version>
+	<version>0.6.0</version>
 
 	<packaging>jar</packaging>
 
@@ -16,7 +16,7 @@
 
 	<name>1m5-neo4j</name>
 	<url>https://1m5.io</url>
-	<description>Invisible Matrix Services</description>
+	<description>Invisible Matrix Services - Neo4J Integration Library</description>
 	<inceptionYear>2018</inceptionYear>
 	<organization>
 		<name>1M5</name>
@@ -31,9 +31,7 @@
 	<developers>
 		<developer>
 			<name>objectorange</name>
-			<organization>Resolving Architecture</organization>
-			<url>http://resolvingarchitecture.com</url>
-			<email>1m5@protonmail.com</email>
+			<email>objectorange@1m5.io</email>
 		</developer>
 	</developers>
 
