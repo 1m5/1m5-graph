@@ -18,10 +18,6 @@
 	<url>https://1m5.io</url>
 	<description>Invisible Matrix Services - Neo4J Integration Library</description>
 	<inceptionYear>2018</inceptionYear>
-	<organization>
-		<name>1M5</name>
-		<url>https://1M5.io</url>
-	</organization>
 	<licenses>
 		<license>
 			<name>Unlicense</name>
