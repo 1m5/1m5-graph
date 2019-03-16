@@ -1,7 +1,6 @@
 package io.onemfive.neo4j;
 
-import io.onemfive.data.NetworkPeer;
-import org.neo4j.graphdb.PropertyContainer;
+import org.neo4j.graphdb.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -13,16 +12,6 @@ public class GraphUtil {
         for(String key : keys) {
             container.setProperty(key,attributes.get(key));
         }
-    }
-
-    public static NetworkPeer mapToPeer(Map<String,Object> m) {
-        NetworkPeer p = new NetworkPeer();
-        p.fromMap(m);
-        return p;
-    }
-
-    public static Map<String,Object> peerToMap(NetworkPeer p) {
-        return p.toMap();
     }
 
 }
