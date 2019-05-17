@@ -4,6 +4,7 @@ import io.onemfive.core.infovault.DAO;
 import io.onemfive.core.infovault.InfoVaultDB;
 import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -102,7 +103,10 @@ public class Neo4jDB implements InfoVaultDB {
                 return false;
             }
 
-            graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(dbDir);
+//            graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(dbDir);
+            graphDb = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(dbDir)
+                    .setConfig(GraphDatabaseSettings.allow_upgrade,"true")
+                    .newGraphDatabase();
 
             Runtime.getRuntime().addShutdownHook(new Thread()
             {
