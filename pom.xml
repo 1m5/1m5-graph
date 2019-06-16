@@ -5,7 +5,7 @@
 
 	<groupId>io.onemfive</groupId>
 	<artifactId>neo4j</artifactId>
-	<version>0.6.0</version>
+	<version>0.6.1</version>
 
 	<packaging>jar</packaging>
 
@@ -27,7 +27,7 @@
 	<developers>
 		<developer>
 			<name>objectorange</name>
-			<email>objectorange@1m5.io</email>
+			<email>objectorange@1m5.i2p</email>
 		</developer>
 	</developers>
 
@@ -36,12 +36,12 @@
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j</artifactId>
-			<version>3.4.6</version>
+			<version>3.5.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-cypher</artifactId>
-			<version>3.4.6</version>
+			<version>3.5.5</version>
 		</dependency>
 		<dependency>
 			<groupId>io.onemfive</groupId>
