@@ -20,6 +20,7 @@ public class Neo4jDB implements InfoVaultDB {
     private boolean initialized = false;
     private Properties properties;
     private GraphDatabaseService graphDb;
+    private String location;
 
     public Neo4jDB() {
         super();
@@ -27,6 +28,14 @@ public class Neo4jDB implements InfoVaultDB {
 
     public GraphDatabaseService getGraphDb() {
         return graphDb;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     @Override
@@ -90,16 +99,15 @@ public class Neo4jDB implements InfoVaultDB {
     }
 
     public boolean init(Properties properties) {
+        if(location==null) {
+            LOG.warning("Neo4J DB location required. Please provide.");
+            return false;
+        }
         if(!initialized) {
             this.properties = properties;
-            String dbLocation = properties.getProperty("1m5.neo4j.db.location");
-            if(dbLocation == null) {
-                LOG.warning("Unable to find property 1m5.neo4j.db.location. Please provide.");
-                return false;
-            }
-            File dbDir = new File(dbLocation);
+            File dbDir = new File(location);
             if(!dbDir.exists() && !dbDir.mkdir()) {
-                LOG.warning("Unable to create graph db directory at: "+dbLocation);
+                LOG.warning("Unable to create graph db directory at: "+location);
                 return false;
             }
 
